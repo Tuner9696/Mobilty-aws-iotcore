@@ -1,0 +1,5 @@
+string frame_id
+float64 timestamp
+string vehicle_id
+AwsUpdatePosition position
+AwsUpdateOrientation orientation

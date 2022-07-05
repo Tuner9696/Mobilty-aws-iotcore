@@ -1,0 +1,26 @@
+<launch>
+  <param name="/use_sim_time" value="true" />
+  <arg name="map_path" default="$(find map_launcher)/map/demomap/demomap"/>
+  <!-- start world -->
+  <!--
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/demomap.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="false"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo"
+   args="$(find multi_turtlebots_sim)/turtlebot3_description/world/demomap.world" respawn="false" output="screen" >
+  -->
+  <node name="gazebo" pkg="gazebo_ros" type="gazebo"
+   args="$(arg map_path).world" respawn="false" output="screen" >
+  </node>
+<!--
+   args="$(find turtlebot3_simulation)/turtlebot3_gazebo/worlds/demomap.world" respawn="false" output="screen" />
+   args="$(find multi_turtlebots_sim)/turtlebot3_description/world/turtlebot3_house.world" respawn="false" output="screen" />
+-->
+  <!-- include our robots -->
+  <include file="$(find multi_turtlebots_sim)/launch/MR-robots.launch"/>
+</launch>

@@ -1,0 +1,13 @@
+<launch>
+  <arg name="map_path" default="$(find map_launcher)/map/demomap/demomap"/>
+
+  <node pkg="mr_converter" name="to_cloud_1" type="singale_to_cloud.py" output="screen">
+    <param name="from_robot_id" value=""/>
+HENHE    <param name="to_robot_id" value="tb3_1"/>
+    <param name="to_global_matrix" value="$(arg map_path)_to_global.csv"/>
+  </node>
+  <node pkg="mr_converter" name="from_cloud_1" type="single_from_cloud.py" output="screen">
+    <param name="to_local_matrix" value="$(arg map_path)_to_local.csv"/>
+  </node>
+
+</launch>

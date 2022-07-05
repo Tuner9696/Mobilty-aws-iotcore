@@ -1,0 +1,36 @@
+mqtt:
+  client:
+    protocol: 4      # MQTTv311
+  connection:
+#    host: localhost
+#    port: 1883
+#    host: aphcddj894fvc-ats.iot.ap-northeast-1.amazonaws.com
+    host: a3re763x5us7oa-ats.iot.ap-northeast-1.amazonaws.com
+    port: 8883
+#    port: 443
+    keepalive: 60
+  private_path: device/001
+# serializer: msgpack:dumps
+# deserializer: msgpack:loads
+bridge:
+  # AWS Operation Type
+  - factory: mqtt_bridge.bridge:MqttToRosBridge
+    msg_type: mr_converter.msg:AwsRoboDestPosUpdate
+    topic_from: $aws/things/MR-Broker/shadow/name/Goal/update
+    topic_to: /aws/move
+  # AWS Vehicle Position
+  - factory: mqtt_bridge.bridge:RosToMqttBridge
+    msg_type: mr_converter.msg:AwsRoboCurPosUpdate
+    topic_from: /aws/position
+    topic_to: $aws/things/MR-Broker/shadow/name/Position/update
+  # AWS Vehicle Status
+  - factory: mqtt_bridge.bridge:RosToMqttBridge
+    msg_type: mr_converter.msg:AwsRoboCurStatusUpdate
+    topic_from: /aws/status
+    topic_to: $aws/things/MR-Broker/shadow/name/Status/update
+  # Command
+  - factory: mqtt_bridge.bridge:MqttToRosBridge
+    msg_type: mr_converter.msg:AwsCommand
+    topic_from: $aws/things/MR-Broker/shadow/name/Command/update
+    topic_to: /aws/command
+

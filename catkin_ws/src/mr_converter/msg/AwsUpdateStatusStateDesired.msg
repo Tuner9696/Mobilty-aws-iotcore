@@ -1,0 +1,3 @@
+float64 timestamp
+string vehicle_id
+string status

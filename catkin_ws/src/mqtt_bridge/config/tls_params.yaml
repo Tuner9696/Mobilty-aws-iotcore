@@ -1,0 +1,7 @@
+tls:
+  ca_certs: /home/ncos/certs/AmazonRootCA1.pem
+  certfile: /home/ncos/certs/50571cdc9b65b33a859dea3169fb92c32a4aeab439c1742cca298ddb538701a4-certificate.pem.crt
+  keyfile: /home/ncos/certs/50571cdc9b65b33a859dea3169fb92c32a4aeab439c1742cca298ddb538701a4-private.pem.key
+  tls_insecure: true
+  proxy_addr: proxygate2.nic.nec.co.jp
+  proxy_port: 8080

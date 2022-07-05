@@ -1,0 +1,18 @@
+<launch>
+  <arg name="local_map_path" value="$(find map_launcher)/map/demomap_marker2/demomap_marker_slam"/>
+  <arg name="global_map_path" value="$(find map_launcher)/map/demomap_marker2/demomap_marker2-global"/>
+
+  <include file="$(find mqtt_bridge)/launch/multi_demo.launch">
+    <arg name="use_tls" value="true"/>
+  </include>
+  <include file="$(find multi_turtlebots_sim)/launch/MR-main.launch">
+    <arg name="map_path" value="$(arg global_map_path)"/>
+  </include>
+  <include file="$(find multi_turtlebots_nav)/launch/MR-navigation.launch">
+    <arg name="map_path" value="$(arg local_map_path)"/>
+  </include>
+  <include file="$(find mr_converter)/launch/converter.launch">
+    <arg name="map_path" value="$(arg local_map_path)"/>
+  </include>
+
+</launch>

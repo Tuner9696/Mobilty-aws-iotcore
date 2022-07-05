@@ -1,0 +1,15 @@
+<launch>
+  <include file="$(find mqtt_bridge)/launch/multi_demo.launch">
+    <arg name="use_tls" value="true"/>
+  </include>
+  <include file="$(find turtlebot3_gazebo)/launch/my_turtlebot3_world.launch">
+    <arg name="gui" value="false"/>
+  </include>
+  <include file="$(find turtlebot3_navigation)/launch/turtlebot3_navigation.launch">
+    <arg name="map_file" value="$(env HOME)/catkin_ws/maps/world_map.yaml"/>
+    <arg name="initial_pose_x" value="2.25"/>
+    <arg name="initial_pose_y" value="1.25"/>
+    <arg name="initial_pose_a" value="-1.57"/>
+  </include>
+  <include file="$(find mr_converter)/launch/converter.launch"/>
+</launch>

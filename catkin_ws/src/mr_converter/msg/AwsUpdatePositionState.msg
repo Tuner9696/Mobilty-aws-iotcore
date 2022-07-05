@@ -1,0 +1,1 @@
+AwsUpdatePositionStateDesired desired

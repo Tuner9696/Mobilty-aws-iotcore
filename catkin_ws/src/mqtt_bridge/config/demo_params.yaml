@@ -1,0 +1,36 @@
+mqtt:
+  client:
+    protocol: 4      # MQTTv311
+  connection:
+#    host: localhost
+#    port: 1883
+#    host: aphcddj894fvc-ats.iot.ap-northeast-1.amazonaws.com
+    host: a2sy0tqpy6uo4c-ats.iot.ap-northeast-1.amazonaws.com
+    port: 8883
+#    port: 443
+    keepalive: 60
+  private_path: device/001
+# serializer: msgpack:dumps
+# deserializer: msgpack:loads
+bridge:
+  # AWS Map
+  - factory: mqtt_bridge.bridge:RosToMqttBridge
+    msg_type: testbot_control.msg:AwsMapUpdate
+    topic_from: /aws/map
+    topic_to: $aws/things/Fuku-test-mono/shadow/name/Map/update
+  # AWS Operation Type
+  - factory: mqtt_bridge.bridge:MqttToRosBridge
+    msg_type: testbot_control.msg:AwsRoboDestPosUpdate
+    topic_from: $aws/things/Fuku-test-mono/shadow/name/Robot1DestPos/update
+    topic_to: /aws/tb3_0/move
+  # AWS Vehicle Position
+  - factory: mqtt_bridge.bridge:RosToMqttBridge
+    msg_type: testbot_control.msg:AwsRoboCurPosUpdate
+    topic_from: /aws/tb3_0/position
+    topic_to: $aws/things/Fuku-test-mono/shadow/name/Robot1CurrPos/update
+  # Command
+  - factory: mqtt_bridge.bridge:MqttToRosBridge
+    msg_type: testbot_control.msg:AwsCommand
+    topic_from: $aws/things/Fuku-test-mono/shadow/name/Command/update
+    topic_to: /aws/command
+

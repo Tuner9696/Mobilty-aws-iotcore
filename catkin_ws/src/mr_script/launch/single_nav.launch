@@ -1,0 +1,16 @@
+<launch>
+  <param name="/use_sim_time" value="false"/>
+  <arg name="local_map_path" value="$(find map_launcher)/map/demomap_marker2/demomap_marker_tb3"/>
+  <arg name="global_map_path" value="$(find map_launcher)/map/demomap_marker2/demomap_marker2-global"/>
+
+  <include file="$(find mqtt_bridge)/launch/actual_demo.launch">
+    <arg name="use_tls" value="true"/>
+  </include>
+  <include file="$(find multi_turtlebots_nav)/launch/turtlebot3_navigation.launch">
+    <arg name="map_path" value="$(arg local_map_path)"/>
+  </include>
+  <include file="$(find mr_converter)/launch/single_converter.launch">
+    <arg name="map_path" value="$(arg local_map_path)"/>
+  </include>
+
+</launch>
